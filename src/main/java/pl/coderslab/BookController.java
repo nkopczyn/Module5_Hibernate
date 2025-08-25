@@ -12,11 +12,13 @@ public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
+    private final PersonDaoZad3 personDaoZad3;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao, PersonDaoZad3 personDaoZad3) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
+        this.personDaoZad3 = personDaoZad3;
     }
 
     @RequestMapping("/books/add")
@@ -69,6 +71,16 @@ public class BookController {
         Book foundBook = bookDao.get(id);
 
         return "Book number " + foundBook.getId() + " : " + foundBook.getTitle();
+    }
+
+    // ZADANIE 3
+    @RequestMapping("/person/add")
+    public String addPerson() {
+        PersonZad3 person = new PersonZad3();
+        person.setLogin("admin");
+        personDaoZad3.add(person);
+
+        return "Person added";
     }
 
 
