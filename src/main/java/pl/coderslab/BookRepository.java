@@ -16,4 +16,13 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
 //    metodę wyszukującą książki dla zadanego id kategorii
     List<Book> findByCategoryId (Long id);
+
+    // lista ksiazek dla danego autora
+
+//    Spring will generate a query like:
+//    SELECT b FROM Book b JOIN b.authors a WHERE a.id = :authorId
+    List<Book> findByAuthors_Id (Long authorId);
+
+    List<Book> findByPublisher_Name (String publisherName);
+
 }

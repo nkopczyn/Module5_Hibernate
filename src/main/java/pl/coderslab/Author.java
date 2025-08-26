@@ -1,5 +1,6 @@
 package pl.coderslab;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class Author {
     private String lastName;
 
     @ManyToMany
+    @JsonIgnore
     private List<Book> books;
 
 

@@ -1,5 +1,6 @@
 package pl.coderslab;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -15,7 +16,9 @@ public class Book {
 
     @ManyToOne
     private Publisher publisher;
+
     @ManyToMany
+    @JsonIgnore
     private List<Author> authors;
 
     // wiele book może należeć do jednego category

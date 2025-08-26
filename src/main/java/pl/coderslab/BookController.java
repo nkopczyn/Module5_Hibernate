@@ -17,16 +17,18 @@ public class BookController {
     // spring data - cos zamiennego z dao
     private final BookRepository bookRepository;
     private final CategoryRepository categoryRepository;
+    private final AuthorRepository authorRepository;
 
     public BookController(BookDao bookDao, PublisherDao publisherDao,
                           AuthorDao authorDao, PersonDaoZad3 personDaoZad3,
-                          BookRepository bookRepository, CategoryRepository categoryRepository) {
+                          BookRepository bookRepository, CategoryRepository categoryRepository, AuthorRepository authorRepository) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
         this.personDaoZad3 = personDaoZad3;
         this.bookRepository = bookRepository;
         this.categoryRepository = categoryRepository;
+        this.authorRepository = authorRepository;
     }
 
     @RequestMapping("/books/add")
@@ -130,9 +132,26 @@ public class BookController {
         return bookRepository.findByTitle(title).toString();
     }
 
-//    @GetMapping("/repobooks/cat/{category}")
-//    public List<Book> repoFindBookByCategory(@PathVariable("category") String category) {
-//
-//        return bookRepository.findByCategory();
-//    }
+    @GetMapping("/repobooks/cat/{category}")
+    public List<Book> repoFindBookByCategory(@PathVariable("category") String categoryString) {
+        List<Book> result = new ArrayList<>();
+        Category cat = categoryRepository.findByName(categoryString);
+        result = bookRepository.findByCategory(cat);
+        return result;
+    }
+
+    @GetMapping("/repobooks/authorid/{id}")
+    public List<Book> findByAuthorId (@PathVariable("id") Long authorId) {
+        return bookRepository.findByAuthors_Id(authorId);
+    }
+
+    @GetMapping("/repobooks/publishername/{name}")
+    public List<Book> repoFindBookByPublisherName(@PathVariable("name") String publisherName) {
+        return bookRepository.findByPublisher_Name(publisherName);
+    }
+
+    @GetMapping("/repoauthor/name/{firstName}")
+    public List<Author> findByAuthorName(@PathVariable("firstName") String firstName) {
+        return authorRepository.findByFirstName(firstName);
+    }
 }
