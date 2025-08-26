@@ -1,5 +1,6 @@
 package pl.coderslab;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,12 +14,17 @@ public class BookController {
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
     private final PersonDaoZad3 personDaoZad3;
+    // spring data - cos zamiennego z dao
+    private final BookRepository bookRepository;
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao, PersonDaoZad3 personDaoZad3) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao,
+                          AuthorDao authorDao, PersonDaoZad3 personDaoZad3,
+                          BookRepository bookRepository) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
         this.personDaoZad3 = personDaoZad3;
+        this.bookRepository = bookRepository;
     }
 
     @RequestMapping("/books/add")
@@ -83,7 +89,31 @@ public class BookController {
         return "Person added";
     }
 
+    //JPQL
+    @RequestMapping("/books/all")
+    public String findAll() {
+        List<Book> all = bookDao.findAll();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Book book : all) {
+            stringBuilder.append(book.getTitle());
+        }
+        return stringBuilder.toString();
+    }
 
+    @RequestMapping("/books/withpublisher")
+    public String booksWithPublisher() {
+        List<Book> all = bookDao.findAllWithPublisher();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Book book : all) {
+            stringBuilder.append(book.getTitle());
+        }
+        return stringBuilder.toString();
+    }
 
+    // spring data
+    @GetMapping("/repoallbooks")
+    public String repoAllBooks() {
+        return bookRepository.findAll().toString();
+    }
 
 }
