@@ -18,6 +18,12 @@ public class Book {
     @ManyToMany
     private List<Author> authors;
 
+    // wiele book może należeć do jednego category
+    @ManyToOne
+    private Category category;
+
+
+
     public Long getId() {
         return id;
     }
@@ -52,5 +58,13 @@ public class Book {
 
     public void setAuthors(List<Author> authors) {
         this.authors = authors;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

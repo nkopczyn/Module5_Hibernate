@@ -16,39 +16,48 @@ public class BookController {
     private final PersonDaoZad3 personDaoZad3;
     // spring data - cos zamiennego z dao
     private final BookRepository bookRepository;
+    private final CategoryRepository categoryRepository;
 
     public BookController(BookDao bookDao, PublisherDao publisherDao,
                           AuthorDao authorDao, PersonDaoZad3 personDaoZad3,
-                          BookRepository bookRepository) {
+                          BookRepository bookRepository, CategoryRepository categoryRepository) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
         this.personDaoZad3 = personDaoZad3;
         this.bookRepository = bookRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     @RequestMapping("/books/add")
     public String addBook() {
         Publisher publisher = new Publisher();
-        publisher.setName("Publisher1");
+        publisher.setName("Publisher3");
         publisherDao.add(publisher);
 
         Author author1 = new Author();
-        author1.setFirstName("jan");
-        author1.setLastName("kowalski");
+        author1.setFirstName("kuba");
+        author1.setLastName("kubowski");
         authorDao.add(author1);
         Author author2 = new Author();
-        author2.setFirstName("zosia");
-        author2.setLastName("nowak");
+        author2.setFirstName("ola");
+        author2.setLastName("oloska");
         authorDao.add(author2);
+
+        Category category1 = new Category();
+        category1.setName("fantasy");
+
+        // jpa repo ma wbudowaną metode save, category repo może być puste byle by było
+        categoryRepository.save(category1);
 
         List<Author> authorsForBook1 = List.of(author1, author2);
 
         Book book = new Book();
-        book.setTitle("Book Title");
+        book.setTitle("Book3");
         book.setPublisher(publisher);
         book.setAuthors(authorsForBook1);
         book.setIsbn("123345");
+        book.setCategory(category1);
         // nie można ustawiać ID ręcznie, @GeneratedValue ustawia je automatycznie
         bookDao.save(book);
 
@@ -116,4 +125,14 @@ public class BookController {
         return bookRepository.findAll().toString();
     }
 
+    @GetMapping("/repobooks/title/{title}")
+    public String repoBookTitle(@PathVariable("title") String title) {
+        return bookRepository.findByTitle(title).toString();
+    }
+
+//    @GetMapping("/repobooks/cat/{category}")
+//    public List<Book> repoFindBookByCategory(@PathVariable("category") String category) {
+//
+//        return bookRepository.findByCategory();
+//    }
 }
