@@ -1,6 +1,8 @@
 package pl.coderslab;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,5 +26,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findByAuthors_Id (Long authorId);
 
     List<Book> findByPublisher_Name (String publisherName);
+
+//    @Query("SELECT b FROM Book b WHERE b.rating BETWEEN ?1 AND ?2")
+//    List<Book> findByRatingBetween (int min, int max);
+
+//    @Query("SELECT b FROM Book b WHERE b.publisher=?1")
+//    List<Book> findByPublisher (Publisher publisher);
+
+//    @Query("SELECT b FROM Book b WHERE b.category.id = :categoryId ORDER BY b.title ASC")
+//    Book findFirstBookByCategoryIdOrderByTitleAsc();
 
 }
