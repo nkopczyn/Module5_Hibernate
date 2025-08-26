@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.category;
 
 import jakarta.persistence.*;
 

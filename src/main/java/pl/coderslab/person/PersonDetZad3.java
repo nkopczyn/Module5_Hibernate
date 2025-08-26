@@ -1,27 +1,24 @@
-package pl.coderslab;
+package pl.coderslab.person;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
-@Table(name="authors")
-public class Author {
-
+@Table(name="personsdetails")
+public class PersonDetZad3 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
-
-    @ManyToMany
-    @JsonIgnore
-    private List<Book> books;
-
+    private String street;
+    private String city;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -40,11 +37,19 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public List<Book> getBooks() {
-        return books;
+    public String getStreet() {
+        return street;
     }
 
-    public void setBooks(List<Book> books) {
-        this.books = books;
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -1,9 +1,18 @@
-package pl.coderslab;
+package pl.coderslab.book;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.coderslab.author.Author;
+import pl.coderslab.author.AuthorDao;
+import pl.coderslab.author.AuthorRepository;
+import pl.coderslab.category.Category;
+import pl.coderslab.category.CategoryRepository;
+import pl.coderslab.person.PersonDaoZad3;
+import pl.coderslab.person.PersonZad3;
+import pl.coderslab.publisher.Publisher;
+import pl.coderslab.publisher.PublisherDao;
 
 import java.util.ArrayList;
 import java.util.List;

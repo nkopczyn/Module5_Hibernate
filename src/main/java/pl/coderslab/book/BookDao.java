@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.book;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

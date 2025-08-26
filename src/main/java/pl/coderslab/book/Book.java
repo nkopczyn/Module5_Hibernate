@@ -1,7 +1,10 @@
-package pl.coderslab;
+package pl.coderslab.book;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import pl.coderslab.category.Category;
+import pl.coderslab.publisher.Publisher;
+import pl.coderslab.author.Author;
 
 import java.util.List;
 

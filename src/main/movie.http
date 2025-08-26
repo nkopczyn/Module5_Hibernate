@@ -1,0 +1,13 @@
+
+POST http://localhost:8080/api/movies
+Content-Type: application/json
+
+{
+  "title": "Film2",
+  "director": {
+    "id": 2,
+    "firstName": "oooo",
+    "lastName": "oooooo"
+  }
+}
+
