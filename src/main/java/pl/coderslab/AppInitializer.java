@@ -23,7 +23,6 @@ public class AppInitializer implements WebApplicationInitializer {
         servlet.addMapping("/");
 
 
-        // dotychczasowa zawartość
         FilterRegistration.Dynamic fr = container.addFilter("encodingFilter",
                 new CharacterEncodingFilter());
         fr.setInitParameter("encoding", "UTF-8");
