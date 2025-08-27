@@ -2,12 +2,14 @@ package pl.coderslab.author;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import pl.coderslab.book.Book;
 
 import java.util.List;
 
 @Entity
-@Table(name="authors")
+@Table(name = "authors")
 public class Author {
 
     @Id
@@ -25,10 +27,12 @@ public class Author {
         return id;
     }
 
+    @NotNull
     public String getFirstName() {
         return firstName;
     }
 
+    @NotNull
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
